@@ -32,6 +32,7 @@ services:
       - netdata_lib:/var/lib/netdata
       - netdata_cache:/var/cache/netdata
       - ./netdata/conf.d:/etc/netdata/health.d
+      - ./netdata/notify.d/health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf:ro
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
