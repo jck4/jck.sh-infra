@@ -1,0 +1,19 @@
+services:
+  foundry:
+    image: felddy/foundryvtt:release
+    container_name: foundryvtt
+    restart: unless-stopped
+    volumes:
+      - foundry_data:/data
+    environment:
+      - FOUNDRY_USERNAME=${FOUNDRY_USERNAME}
+      - FOUNDRY_PASSWORD=${FOUNDRY_PASSWORD}
+      - FOUNDRY_ADMIN_KEY=${FOUNDRY_PASSWORD}
+      - FOUNDRY_LICENSE_KEY=${FOUNDRY_LICENSE_KEY}
+      - FOUNDRY_HOSTNAME=dnd.jck.sh
+      - FOUNDRY_PORT=30000
+    ports:
+      - "30000:30000"
+
+volumes:
+  foundry_data:

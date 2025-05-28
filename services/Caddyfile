@@ -1,0 +1,18 @@
+{
+    email jacob.d.burgett@gmail.com
+    acme_ca https://acme.zerossl.com/v2/DV90
+}
+
+dnd.jck.sh {
+    reverse_proxy localhost:30000
+    tls {
+        protocols tls1.2 tls1.3
+    }
+}
+
+jck.sh {
+    reverse_proxy localhost:3000
+    tls {
+        protocols tls1.2 tls1.3
+    }
+}
