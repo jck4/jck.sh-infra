@@ -58,3 +58,10 @@ resource "aws_route53_record" "dnd" {
   ttl     = 300
   records = [aws_lightsail_instance.this.public_ip_address]
 }
+resource "aws_route53_record" "monitoring" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "monitoring.jck.sh"
+  type    = "A"
+  ttl     = 300
+  records = [aws_lightsail_instance.this.public_ip_address]
+}
