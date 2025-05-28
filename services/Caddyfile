@@ -16,3 +16,10 @@ jck.sh {
         protocols tls1.2 tls1.3
     }
 }
+
+monitoring.jck.sh {
+    reverse_proxy localhost:19999
+    tls {
+        protocols tls1.2 tls1.3
+    }
+}

@@ -1,6 +1,13 @@
 terraform {
   required_version = ">= 1.0"
 
+  backend "s3" {
+    bucket         = "jcksh-terraform-state"
+    key            = "infra/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -13,18 +20,19 @@ provider "aws" {
   region = "us-east-1"
 }
 
+resource "aws_s3_bucket" "tf_state" {
+  bucket = "jcksh-terraform-state"
+
+  tags = {
+    Name        = "Terraform State Bucket"
+    Environment = "infra"
+  }
+}
 
 data "aws_route53_zone" "this" {
   name         = "jck.sh"
   private_zone = false
 }
-
-
-resource "aws_lightsail_key_pair" "this" {
-  name       = "jck.sh-key"
-  public_key = file("/home/jck/.ssh/id_ed25519.pub")
-}
-
 
 resource "aws_lightsail_instance" "this" {
   name              = "jck.sh"
@@ -32,7 +40,7 @@ resource "aws_lightsail_instance" "this" {
   blueprint_id      = "ubuntu_24_04"
   bundle_id         = "medium_3_0"
 
-  key_pair_name = aws_lightsail_key_pair.this.name
+  key_pair_name = "jck.sh-key"
 }
 
 resource "aws_route53_record" "www" {
