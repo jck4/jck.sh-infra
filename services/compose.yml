@@ -14,11 +14,6 @@ services:
       - FOUNDRY_PORT=30000
     ports:
       - "30000:30000"
-
-
-version: '3.8'
-
-services:
   netdata:
     image: netdata/netdata:latest
     container_name: netdata
