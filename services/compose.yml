@@ -20,6 +20,7 @@ services:
     environment:
       - DO_NOT_TRACK=0
       - DISABLE_CLOUD=1
+      - NETDATA_DISCORD_WEBHOOK=${NETDATA_DISCORD_WEBHOOK}
     ports:
       - "19999:19999"
     cap_add:
@@ -30,6 +31,7 @@ services:
       - netdata_config:/etc/netdata
       - netdata_lib:/var/lib/netdata
       - netdata_cache:/var/cache/netdata
+      - ./netdata/conf.d:/etc/netdata/health.d
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
